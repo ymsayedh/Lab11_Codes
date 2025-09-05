@@ -1,0 +1,12 @@
+.control
+alter @VID[pulse] [ 0 100m 1u 10n 10n 1u 2u 1 ]
+save all
+TRAN 10n 3u
+meas tran intial_val find vodiff at=0
+meas tran final_val find vodiff at=1.5u
+let err_99_val = (final_val-intial_val)*0.99 + intial_val
+meas tran sett_time when vodiff=err_99_val
+let settle_time = sett_time - 1u
+meas tran t_sett max settle_time
+write diff_trans.raw
+.endc

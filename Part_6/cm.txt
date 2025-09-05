@@ -1,0 +1,6 @@
+.control
+alter @VICM[pulse] [ 0 100m 1u 10n 10n 1u 2u 1 ]
+save all
+TRAN 1n 3u
+write cm_trans.raw
+.endc

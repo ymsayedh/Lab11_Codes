@@ -1,0 +1,10 @@
+.control
+alter @VID[sin] [ 0 150m 100k ]
+save all
+TRAN 0.1u 30u
+meas tran input_pk2pk PP vid from=0 to=30u
+meas tran out_pk2pk PP vodiff from=0 to=30u
+let AV_CL_c = out_pk2pk/input_pk2pk 
+meas tran AV_CL max AV_CL_c
+write output_trans.raw
+.endc
