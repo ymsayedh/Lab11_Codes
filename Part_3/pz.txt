@@ -1,0 +1,5 @@
+.control
+pz VOUTP 0 VOUTP 0 cur pz
+print all
+write pz.raw
+.endc
