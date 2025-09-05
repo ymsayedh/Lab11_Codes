@@ -1,0 +1,44 @@
+* == Vector For Using Symbols ==
+
+set sym = ( x1. x2. x3. )
+
+* == Vector For Not Using Symbols ==
+
+*set sym = ( )
+
+* == Vector For MOSFETs ==
+
+set mos = ( xm1 xm2 xm3 xm4 xm5 xm6 xm7 xm8 xm9 xm10 xm11 xm12 xm13 xm14 )
+
+* == Initialize Counters For Loop ==
+
+let i = 1
+let x = 1
+let sym_loops = 3
+let mos_loops = 13
+
+repeat $&sym_loops
+  dowhile x <= $&mos_loops
+    echo m.$sym[$&i]$mos[$&x].m0
+    save @m.$sym[$&i]$mos[$&x].m0[id]
+    save @m.$sym[$&i]$mos[$&x].m0[vgs]
+    save @m.$sym[$&i]$mos[$&x].m0[vds]
+    save @m.$sym[$&i]$mos[$&x].m0[vdsat]
+    save @m.$sym[$&i]$mos[$&x].m0[vth]
+    save @m.$sym[$&i]$mos[$&x].m0[gm]
+    save @m.$sym[$&i]$mos[$&x].m0[gds]
+    save @m.$sym[$&i]$mos[$&x].m0[gmbs]
+    save @m.$sym[$&i]$mos[$&x].m0[cgs]
+    save @m.$sym[$&i]$mos[$&x].m0[cgd]
+    save @m.$sym[$&i]$mos[$&x].m0[csb]
+    save @m.$sym[$&i]$mos[$&x].m0[cdb]
+    let x = x + 1
+  end
+  echo
+  let i = i + 1
+  let x = 1
+end
+
+op
+write cl_op.raw
+.endc

@@ -1,0 +1,16 @@
+control
+alter VID acmag=1
+save all
+AC dec 10 1 10G
+meas AC DC_gain max vmag(vodiff)
+meas AC DC_gain_db max vdb(vodiff)
+let f3db = DC_gain/sqrt(2)
+meas AC BW when vmag(vodiff)=f3db
+let GBW_c = DC_gain * BW
+meas AC GBW max GBW_c
+meas AC UGF when vmag(vodiff)=1
+meas AC phase find vph(vodiff) when vmag(vodiff)=1
+let PM_c = 180 - (abs(phase)*180/pi)
+meas AC PM max PM_c
+write ac_cl.raw
+.endc
