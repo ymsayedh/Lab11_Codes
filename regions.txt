@@ -1,0 +1,33 @@
+.control
+save allprint 
+let x = 1
+set num = {$&x}
+dowhile x <= 13
+save @m.x1.xm{$num}.m0[id]
+save @m.x1.xm{$num}.m0[vgs]
+save @m.x1.xm{$num}.m0[vds]
+save @m.x1.xm{$num}.m0[vdsat]
+save @m.x1.xm{$num}.m0[vth]
+save @m.x1.xm{$num}.m0[gm]
+save @m.x1.xm{$num}.m0[gds]
+save @m.x1.xm{$num}.m0[gmbs]
+save @m.x1.xm{$num}.m0[cgs]
+save @m.x1.xm{$num}.m0[cgd]
+save @m.x1.xm{$num}.m0[csb]
+save @m.x1.xm{$num}.m0[cdb]
+let x = x + 1
+set num = {$&x}
+end
+op
+dc VICM -2.5 2.5 0.001
+
+let x = 1
+set num = {$&x}
+dowhile x <= 13
+let m{$num}_regions=@m.x1.xm{$num}.m0[vds]-@m.x1.xm{$num}.m0[vdsat]
+let m{$num}_region = 1 + (m{$num}_regions/abs(m{$num}_regions) + 1)/2
+save m{$num}_region
+let x = x + 1
+set num = {$&x}
+end
+write regions.raw
